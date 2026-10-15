@@ -150,3 +150,27 @@ function add_salt_repository() {
   local target_url="https://packages.broadcom.com/artifactory/saltproject-deb/"
   echo "deb [signed-by=${keyring_file} arch=${arch}] ${target_url} stable main" >/etc/apt/sources.list.d/salt.list
 }
+
+#---  FUNCTION  -------------------------------------------------------------------------------------------------------
+#          NAME:  add_1password_repository
+#   DESCRIPTION:  Add 1Password repository to packages sources.
+#                 https://developer.1password.com/docs/cli/get-started/#install
+#----------------------------------------------------------------------------------------------------------------------
+function add_1password_repository() {
+  local arch=amd64
+  is_arm64 && arch=arm64
+
+  # Download public key and dearmor it so APT can use it as a binary keyring
+  local keyring_file="/etc/apt/keyrings/1password-archive-keyring.gpg"
+  local key_url="https://downloads.1password.com/linux/keys/1password.asc"
+  local tmp_key
+  tmp_key=$(mktemp)
+  download "${key_url}" "${tmp_key}"
+  gpg --dearmor < "${tmp_key}" > "${keyring_file}"
+  rm -f "${tmp_key}"
+  chmod 644 "${keyring_file}"
+
+  # Create apt repo target configuration
+  local target_url="https://downloads.1password.com/linux/debian/${arch}"
+  echo "deb [signed-by=${keyring_file} arch=${arch}] ${target_url} stable main" >/etc/apt/sources.list.d/1password.list
+}

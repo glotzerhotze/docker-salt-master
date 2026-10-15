@@ -12,7 +12,7 @@ source "${FUNCTIONS_FILE}"
 
 log_info "Installing required packages and build dependencies ..."
 REQUIRED_PACKAGES=(
-  binutils patchelf libldap-common libgit2-1.9
+  binutils patchelf libldap-common libgit2-1.9 1password-cli
 )
 
 BUILD_DEPENDENCIES=(
@@ -21,6 +21,9 @@ BUILD_DEPENDENCIES=(
 
 log_info "Adding salt repository..."
 add_salt_repository
+
+log_info "Adding 1password repository..."
+add_1password_repository
 
 apt-get update
 install_pkgs "${REQUIRED_PACKAGES[@]}" "${BUILD_DEPENDENCIES[@]}"
