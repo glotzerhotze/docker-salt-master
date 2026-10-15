@@ -8,6 +8,7 @@ for the list of changes in SaltStack.
 
 - Update `salt-master` to `3008.3`.
 - Include the Docker image changes introduced in `3007.15`.
+- Add `1password-cli` (`op`) from the official 1Password APT repository (`amd64` and `arm64`).
 
 **3007.15**
 
