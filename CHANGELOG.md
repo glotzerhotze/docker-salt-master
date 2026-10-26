@@ -1,8 +1,17 @@
 # Changelog
 
 This file only reflects the changes that are made in this image.
-Please refer to the [Salt 3008.3 Release Notes](https://docs.saltproject.io/en/3008/topics/releases/3008.3.html)
+Please refer to the [Salt 3008.4 Release Notes](https://docs.saltproject.io/en/3008/topics/releases/3008.4.html)
 for the list of changes in SaltStack.
+
+**3007.16**
+
+- Update `salt-master` to `3007.16` _Chlorine_.
+
+**3008.4**
+
+- Update `salt-master` to `3008.4`.
+- Fetch the `salt-ssh` Python lock files from the official Salt release source archive, verifying its SHA512 checksum, including packaging revisions not published on PyPI.
 
 **3008.3**
 

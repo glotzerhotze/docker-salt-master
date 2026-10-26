@@ -43,14 +43,14 @@ output=$(docker-exec salt-master --versions)
 echo "${output}"
 
 CURRENT_MASTER_VERSION="$(echo -n "${output}" | grep -Ei 'salt: ([^\s]+)' | awk '{print $2}')"
-check_equal "${CURRENT_MASTER_VERSION%%-*}" "${EXPECTED_VERSION%%-*}" "salt-master version"
+check_salt_version "${CURRENT_MASTER_VERSION}" "${EXPECTED_VERSION}" "salt-master version"
 
 echo "==> Checking salt-minion version ..."
 output=$(docker-exec salt-minion --versions)
 echo "${output}"
 
 CURRENT_MINION_VERSION="$(echo -n "${output}" | grep -Ei 'salt: ([^\s]+)' | awk '{print $2}')"
-check_equal "${CURRENT_MINION_VERSION%%-*}" "${EXPECTED_VERSION%%-*}" "salt-minion version"
+check_salt_version "${CURRENT_MINION_VERSION}" "${EXPECTED_VERSION}" "salt-minion version"
 
 echo "==> Checking 1password-cli ..."
 docker-exec op --version || error "1password-cli is installed"
