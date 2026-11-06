@@ -96,14 +96,14 @@ jobs:
           driver-opts: network=host
 
       - name: Configure read-only AWS credentials
-        if: github.actor != 'dependabot[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         uses: aws-actions/configure-aws-credentials@v6.3.0
         with:
           role-to-assume: ${{ vars.AWS_ECR_READ_ONLY_ROLE_ARN }}
           aws-region: us-east-1
 
       - name: Login to Amazon ECR Public
-        if: github.actor != 'dependabot[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         uses: aws-actions/amazon-ecr-login@v2.1.7
         with:
           registry-type: public
@@ -173,14 +173,14 @@ jobs:
           persist-credentials: false
 
       - name: Configure read-only AWS credentials
-        if: github.actor != 'dependabot[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         uses: aws-actions/configure-aws-credentials@v6.3.0
         with:
           role-to-assume: ${{ vars.AWS_ECR_READ_ONLY_ROLE_ARN }}
           aws-region: us-east-1
 
       - name: Login to Amazon ECR Public
-        if: github.actor != 'dependabot[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         uses: aws-actions/amazon-ecr-login@v2.1.7
         with:
           registry-type: public
@@ -204,7 +204,7 @@ jobs:
           docker pull ${IMAGE_NAME}-gui
 
       - name: Setup Python
-        uses: actions/setup-python@v7.0.0
+        uses: actions/setup-python@v7.1.0
         with:
           python-version: "3.10"
 
